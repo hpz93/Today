@@ -17,7 +17,7 @@ class ReminderListCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var done: UIButton!
+    @IBOutlet var doneButton: UIButton!
     
     var doneButtonAction: DoneButtonAction?
     

@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Reminder List View Controller-->
         <scene sceneID="fyW-H4-1zr">
             <objects>
-                <tableViewController id="2BV-Iz-mYV" sceneMemberID="viewController">
+                <tableViewController id="2BV-Iz-mYV" customClass="ReminderListViewController" customModule="Today" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cEp-aG-G1Q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +61,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateLabel" destination="RRc-KE-uqI" id="rMQ-4x-Pop"/>
-                                    <outlet property="done" destination="hGM-hZ-KWh" id="7N9-bU-clN"/>
+                                    <outlet property="doneButton" destination="hGM-hZ-KWh" id="7N9-bU-clN"/>
                                     <outlet property="titleLabel" destination="9gQ-0M-rE2" id="q5e-Xj-baN"/>
                                 </connections>
                             </tableViewCell>
