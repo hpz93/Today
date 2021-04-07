@@ -14,6 +14,7 @@
 		D90D74FF261ABE9000C30693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D90D74FE261ABE9000C30693 /* Assets.xcassets */; };
 		D90D7502261ABE9000C30693 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D90D7500261ABE9000C30693 /* LaunchScreen.storyboard */; };
 		D90D750B261D6F5200C30693 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D750A261D6F5200C30693 /* Reminder.swift */; };
+		D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7513261DA08C00C30693 /* ReminderListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D90D7501261ABE9000C30693 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D90D7503261ABE9000C30693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D90D750A261D6F5200C30693 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		D90D7513261DA08C00C30693 /* ReminderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				D90D74F9261ABE8600C30693 /* ViewController.swift */,
+				D90D7513261DA08C00C30693 /* ReminderListCell.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D90D74FA261ABE8600C30693 /* ViewController.swift in Sources */,
+				D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */,
 				D90D74F6261ABE8600C30693 /* AppDelegate.swift in Sources */,
 				D90D74F8261ABE8600C30693 /* SceneDelegate.swift in Sources */,
 				D90D750B261D6F5200C30693 /* Reminder.swift in Sources */,

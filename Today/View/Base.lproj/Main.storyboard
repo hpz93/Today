@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="99" id="K4K-nq-ZDK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReminderListCell" rowHeight="99" id="K4K-nq-ZDK" customClass="ReminderListCell" customModule="Today" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K4K-nq-ZDK" id="pv3-g5-ul0">
@@ -30,6 +30,9 @@
                                                 <constraint firstAttribute="width" secondItem="hGM-hZ-KWh" secondAttribute="height" multiplier="1:1" id="yDN-mh-n55"/>
                                             </constraints>
                                             <state key="normal" backgroundImage="circle" catalog="system"/>
+                                            <connections>
+                                                <action selector="doneButtonTriggered:" destination="K4K-nq-ZDK" eventType="touchUpInside" id="hhH-Ld-zdR"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gQ-0M-rE2">
                                             <rect key="frame" x="72" y="20" width="33" height="20.5"/>
@@ -56,6 +59,11 @@
                                         <constraint firstItem="9gQ-0M-rE2" firstAttribute="leading" secondItem="hGM-hZ-KWh" secondAttribute="trailing" constant="8" symbolic="YES" id="vB8-Ub-AjQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="RRc-KE-uqI" id="rMQ-4x-Pop"/>
+                                    <outlet property="done" destination="hGM-hZ-KWh" id="7N9-bU-clN"/>
+                                    <outlet property="titleLabel" destination="9gQ-0M-rE2" id="q5e-Xj-baN"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
