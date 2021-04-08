@@ -8,7 +8,9 @@
 import UIKit
 
 class ReminderListDataSource: NSObject {
-    
+    // Because the property is lazy, the initializer executes the first time the property is accessed.
+    // DateFormatter is a powerful class for creating strings from Date values in a variety of formats.
+    private lazy var dateFormatter = RelativeDateTimeFormatter()
 }
 
 // MARK: - Data Source Methods
@@ -28,6 +30,7 @@ extension ReminderListDataSource: UITableViewDataSource {
             fatalError("Unable to dequeue ReminderCell")
         }
         let reminder = Reminder.testData[indexPath.row]
+        let dateText = dateFormatter.localizedString(for: reminder.dueDate, relativeTo: Date())
 /**
 Encapsulate the imformation with access control and the configure method.
 //         let image = reminder.isComplete ? UIImage(systemName: "circle.fill") : UIImage(systemName: "circle")
@@ -41,7 +44,7 @@ Encapsulate the imformation with access control and the configure method.
 //            tableView.reloadRows(at: [indexPath], with: .none)
 //        }
 */
-        cell.configure(title: reminder.title, dateText: reminder.dueDate.description, isDone: reminder.isComplete) {
+        cell.configure(title: reminder.title, dateText: dateText, isDone: reminder.isComplete) {
             Reminder.testData[indexPath.row].isComplete.toggle()
             tableView.reloadRows(at: [indexPath], with: .none)
         }
