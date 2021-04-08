@@ -16,6 +16,7 @@
 		D90D750B261D6F5200C30693 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D750A261D6F5200C30693 /* Reminder.swift */; };
 		D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7513261DA08C00C30693 /* ReminderListCell.swift */; };
 		D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */; };
+		D90D751E261ECE2600C30693 /* ReminderListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D751D261ECE2600C30693 /* ReminderListDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D90D750A261D6F5200C30693 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		D90D7513261DA08C00C30693 /* ReminderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListCell.swift; sourceTree = "<group>"; };
 		D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
+		D90D751D261ECE2600C30693 /* ReminderListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,40 +66,41 @@
 			children = (
 				D90D74F5261ABE8600C30693 /* AppDelegate.swift */,
 				D90D74F7261ABE8600C30693 /* SceneDelegate.swift */,
-				D90D750D261D6F6400C30693 /* Model */,
-				D90D750F261D6F7D00C30693 /* View */,
-				D90D7510261D6F8500C30693 /* View Controller */,
+				D90D74FB261ABE8600C30693 /* Main.storyboard */,
+				D90D7500261ABE9000C30693 /* LaunchScreen.storyboard */,
 				D90D74FE261ABE9000C30693 /* Assets.xcassets */,
 				D90D7503261ABE9000C30693 /* Info.plist */,
+				D90D750D261D6F6400C30693 /* Models */,
+				D90D750F261D6F7D00C30693 /* Views */,
+				D90D7510261D6F8500C30693 /* View Controllers */,
 			);
 			path = Today;
 			sourceTree = "<group>";
 		};
-		D90D750D261D6F6400C30693 /* Model */ = {
+		D90D750D261D6F6400C30693 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				D90D750A261D6F5200C30693 /* Reminder.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		D90D750F261D6F7D00C30693 /* View */ = {
+		D90D750F261D6F7D00C30693 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D90D74FB261ABE8600C30693 /* Main.storyboard */,
-				D90D7500261ABE9000C30693 /* LaunchScreen.storyboard */,
+				D90D7513261DA08C00C30693 /* ReminderListCell.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		D90D7510261D6F8500C30693 /* View Controller */ = {
+		D90D7510261D6F8500C30693 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D90D74F9261ABE8600C30693 /* ReminderListViewController.swift */,
-				D90D7513261DA08C00C30693 /* ReminderListCell.swift */,
 				D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */,
+				D90D751D261ECE2600C30693 /* ReminderListDataSource.swift */,
 			);
-			path = "View Controller";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +179,7 @@
 				D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */,
 				D90D74F8261ABE8600C30693 /* SceneDelegate.swift in Sources */,
 				D90D750B261D6F5200C30693 /* Reminder.swift in Sources */,
+				D90D751E261ECE2600C30693 /* ReminderListDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

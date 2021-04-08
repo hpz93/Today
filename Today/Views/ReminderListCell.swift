@@ -19,11 +19,19 @@ class ReminderListCell: UITableViewCell {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
     
-    var doneButtonAction: DoneButtonAction?
+    private var doneButtonAction: DoneButtonAction?
     
     // The IBAction attribute indicates that the instance method can connect to your UI file. When the system loads your view hierarchy, it uses that connection information to set your action method as the target of the view.
     
     @IBAction func doneButtonTriggered(_ sender: UIButton) {
         doneButtonAction?()
+    }
+    
+    func configure(title: String, dateText: String, isDone: Bool, doneButtonAction:  @escaping DoneButtonAction) {
+        titleLabel.text = title
+        dateLabel.text = dateText
+        let image = isDone ? UIImage(systemName: "circle.fill") : UIImage(systemName: "circle")
+        doneButton.setBackgroundImage(image, for: .normal)
+        self.doneButtonAction = doneButtonAction
     }
 }
