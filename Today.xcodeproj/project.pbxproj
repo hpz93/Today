@@ -18,6 +18,9 @@
 		D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */; };
 		D90D751E261ECE2600C30693 /* ReminderListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D751D261ECE2600C30693 /* ReminderListDataSource.swift */; };
 		D90D7521261EE6AC00C30693 /* ReminderDetailViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7520261EE6AC00C30693 /* ReminderDetailViewDataSource.swift */; };
+		D90D7524261F1C1300C30693 /* EditTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7523261F1C1200C30693 /* EditTitleCell.swift */; };
+		D90D7527261F1D0000C30693 /* EditDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7526261F1D0000C30693 /* EditDateCell.swift */; };
+		D90D752A261F1D6E00C30693 /* EditNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7529261F1D6E00C30693 /* EditNotesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		D90D751D261ECE2600C30693 /* ReminderListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListDataSource.swift; sourceTree = "<group>"; };
 		D90D7520261EE6AC00C30693 /* ReminderDetailViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewDataSource.swift; sourceTree = "<group>"; };
+		D90D7523261F1C1200C30693 /* EditTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleCell.swift; sourceTree = "<group>"; };
+		D90D7526261F1D0000C30693 /* EditDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateCell.swift; sourceTree = "<group>"; };
+		D90D7529261F1D6E00C30693 /* EditNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				D90D7513261DA08C00C30693 /* ReminderListCell.swift */,
+				D90D7523261F1C1200C30693 /* EditTitleCell.swift */,
+				D90D7526261F1D0000C30693 /* EditDateCell.swift */,
+				D90D7529261F1D6E00C30693 /* EditNotesCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,10 +187,13 @@
 			files = (
 				D90D74FA261ABE8600C30693 /* ReminderListViewController.swift in Sources */,
 				D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */,
+				D90D7524261F1C1300C30693 /* EditTitleCell.swift in Sources */,
 				D90D74F6261ABE8600C30693 /* AppDelegate.swift in Sources */,
 				D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */,
 				D90D7521261EE6AC00C30693 /* ReminderDetailViewDataSource.swift in Sources */,
 				D90D74F8261ABE8600C30693 /* SceneDelegate.swift in Sources */,
+				D90D752A261F1D6E00C30693 /* EditNotesCell.swift in Sources */,
+				D90D7527261F1D0000C30693 /* EditDateCell.swift in Sources */,
 				D90D750B261D6F5200C30693 /* Reminder.swift in Sources */,
 				D90D751E261ECE2600C30693 /* ReminderListDataSource.swift in Sources */,
 			);
