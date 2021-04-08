@@ -8,6 +8,19 @@
 import UIKit
 
 class ReminderListViewController: UITableViewController {
+    static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
+    
+    // This method notifies the view controller before a segue is performed.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Self.showDetailSegueIdentifier,
+           let destination = segue.destination as? ReminderDetailViewController,
+           let cell = sender as? UITableViewCell,
+           let indexPath = tableView.indexPath(for: cell) {
+            let reminder = Reminder.testData[indexPath.row]
+            // Inject the reminder data into the incoming view controller.
+            destination.configure(with: reminder)
+        }
+    }
 }
 
 // MARK: - DataSource Methods
@@ -32,7 +45,6 @@ extension ReminderListViewController {
         cell.dateLabel.text = reminder.dueDate.description
         // Update the Done button to display the appropriate completion status.
         cell.doneButton.setBackgroundImage(image, for: .normal)
-        // 
         cell.doneButtonAction = {
             Reminder.testData[indexPath.row].isComplete.toggle()
             // Reload the table rows for completed reminders.

@@ -15,6 +15,7 @@
 		D90D7502261ABE9000C30693 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D90D7500261ABE9000C30693 /* LaunchScreen.storyboard */; };
 		D90D750B261D6F5200C30693 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D750A261D6F5200C30693 /* Reminder.swift */; };
 		D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7513261DA08C00C30693 /* ReminderListCell.swift */; };
+		D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D90D7503261ABE9000C30693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D90D750A261D6F5200C30693 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		D90D7513261DA08C00C30693 /* ReminderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListCell.swift; sourceTree = "<group>"; };
+		D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				D90D74F9261ABE8600C30693 /* ReminderListViewController.swift */,
 				D90D7513261DA08C00C30693 /* ReminderListCell.swift */,
+				D90D7517261DF75800C30693 /* ReminderDetailViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				D90D74FA261ABE8600C30693 /* ReminderListViewController.swift in Sources */,
 				D90D7514261DA08C00C30693 /* ReminderListCell.swift in Sources */,
 				D90D74F6261ABE8600C30693 /* AppDelegate.swift in Sources */,
+				D90D7518261DF75800C30693 /* ReminderDetailViewController.swift in Sources */,
 				D90D74F8261ABE8600C30693 /* SceneDelegate.swift in Sources */,
 				D90D750B261D6F5200C30693 /* Reminder.swift in Sources */,
 			);
