@@ -57,7 +57,7 @@ class ReminderDetailViewDataSource: NSObject {
             case .title:
                 return nil
             case .date:
-                return UIImage(systemName: "calender.circle")
+                return UIImage(systemName: "calendar.circle")
             case .time:
                 return UIImage(systemName: "clock")
             case .notes:
@@ -83,7 +83,7 @@ extension ReminderDetailViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReminderDetailViewDataSource.reminderDetailCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Self.reminderDetailCellIdentifier, for: indexPath)
         let row = ReminderRow(rawValue: indexPath.row)
         cell.textLabel?.text = row?.displayText(for: reminder)
         cell.imageView?.image = row?.cellImage

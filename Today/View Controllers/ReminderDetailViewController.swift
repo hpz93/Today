@@ -47,7 +47,8 @@ class ReminderDetailViewController: UITableViewController {
 //    }
     
     private var reminder: Reminder?
-    private var detailViewDataSource: ReminderDetailViewDataSource?
+//    private var detailViewDataSource: ReminderDetailViewDataSource?
+    private var dataSource: UITableViewDataSource?
     
     //  When initializing a view controller from a storyboard, iOS calls the init(coder:) initializer. This configure method approach is useful for configuring after initializing, such as injecting dependencies.
     func configure(with reminder: Reminder) {
@@ -56,11 +57,29 @@ class ReminderDetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // If you were responding to a user action, you would animate the call to setEditing(_:animated:) by passing true. Because UIKit calls viewDidLoad() as part of the initial setup, and not in response to a user action, you turn off the animation.
+        setEditing(false, animated: false)
+        navigationItem.setRightBarButton(editButtonItem, animated: false)
+        // The table view requires a reuse identifier to retrieve a cell with dequeueReusableCell(withIdentifier:for:). Passing an unregistered identifier to that method raises an exception and terminates the app.
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifier)
+        
+//        detailViewDataSource = ReminderDetailViewDataSource(reminder: reminder)
+//        tableView.dataSource = detailViewDataSource
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
         guard let reminder = reminder else {
             fatalError("No reminder found for detail view")
         }
-        detailViewDataSource = ReminderDetailViewDataSource(reminder: reminder)
-        tableView.dataSource = detailViewDataSource
+        // If editing is true, set the dataSource property to a new edit data source.
+        if editing {
+            dataSource = ReminderDetailEditDataSource(reminder: reminder)
+        } else {
+            dataSource = ReminderDetailViewDataSource(reminder: reminder)
+        }
+        tableView.dataSource = dataSource
+        tableView.reloadData()
     }
 }
 
