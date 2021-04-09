@@ -75,11 +75,26 @@ class ReminderDetailViewController: UITableViewController {
         // If editing is true, set the dataSource property to a new edit data source.
         if editing {
             dataSource = ReminderDetailEditDataSource(reminder: reminder)
+            // Change the navigation title to Edit Reminder if the table is in edit mode and to View Reminder if it is not.
+            navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
+            // Add a Cancel button to the navigation bar.
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
         } else {
             dataSource = ReminderDetailViewDataSource(reminder: reminder)
+            navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
+            // Remove the Cancel button from view mode.
+            navigationItem.leftBarButtonItem = nil
+            // Enable the Edit button when the table view is in view mode.
+            editButtonItem.isEnabled = true
         }
         tableView.dataSource = dataSource
         tableView.reloadData()
+    }
+    
+    // The attribute @objc makes the function callable from a selector that you define using #selector.
+    @objc
+    func cancelButtonTrigger() {
+        setEditing(false, animated: true)
     }
 }
 

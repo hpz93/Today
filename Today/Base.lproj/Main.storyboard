@@ -82,13 +82,13 @@
         <scene sceneID="LN4-KB-udA">
             <objects>
                 <tableViewController id="BX0-6K-kCr" customClass="ReminderDetailViewController" customModule="Today" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jgg-ed-J2w">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jgg-ed-J2w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReminderDetailCell" textLabel="2V0-Tv-fSh" style="IBUITableViewCellStyleDefault" id="gSk-rq-5Rj">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gSk-rq-5Rj" id="kJY-JM-kA6">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -105,7 +105,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditTitleCell" id="Md8-Xt-ogq" customClass="EditTitleCell" customModule="Today" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="71.5" width="414" height="34.5"/>
+                                <rect key="frame" x="0.0" y="99" width="414" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Md8-Xt-ogq" id="djd-UR-Iz4">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="34.5"/>
@@ -129,21 +129,21 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditDateCell" rowHeight="216" id="YWl-UI-ePI" customClass="EditDateCell" customModule="Today" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="106" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="133.5" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YWl-UI-ePI" id="upb-V4-U11">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Nv-ei-aHL">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                            <rect key="frame" x="20" y="20" width="414" height="176"/>
                                         </datePicker>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="leading" secondItem="upb-V4-U11" secondAttribute="leading" id="4xu-Iw-R8e"/>
-                                        <constraint firstAttribute="bottom" secondItem="2Nv-ei-aHL" secondAttribute="bottom" id="o7S-VH-MM5"/>
-                                        <constraint firstAttribute="trailing" secondItem="2Nv-ei-aHL" secondAttribute="trailing" id="sEf-vN-rL1"/>
-                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="top" secondItem="upb-V4-U11" secondAttribute="top" id="t67-TS-sko"/>
+                                        <constraint firstAttribute="bottom" secondItem="2Nv-ei-aHL" secondAttribute="bottom" constant="20" symbolic="YES" id="4Va-Hk-PGQ"/>
+                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="leading" secondItem="upb-V4-U11" secondAttribute="leading" constant="20" symbolic="YES" id="ZQb-66-Mbv"/>
+                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="top" secondItem="upb-V4-U11" secondAttribute="top" constant="20" symbolic="YES" id="fe2-2T-S0x"/>
+                                        <constraint firstAttribute="trailing" secondItem="2Nv-ei-aHL" secondAttribute="trailing" constant="20" symbolic="YES" id="xww-xr-Pdt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -151,7 +151,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditNotesCell" rowHeight="216" id="WZM-n5-dC7" customClass="EditNotesCell" customModule="Today" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="322" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="349.5" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WZM-n5-dC7" id="H7H-bq-EO6">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
