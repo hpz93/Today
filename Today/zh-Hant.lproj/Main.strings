@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "2V0-Tv-fSh"; */
+"2V0-Tv-fSh.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "9gQ-0M-rE2"; */
+"9gQ-0M-rE2.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "View Reminder"; ObjectID = "IMz-uS-rbl"; */
+"IMz-uS-rbl.title" = "View Reminder";
+
+/* Class = "UITextField"; text = "TextField"; ObjectID = "MOE-r0-Vn5"; */
+"MOE-r0-Vn5.text" = "TextField";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "RRc-KE-uqI"; */
+"RRc-KE-uqI.text" = "Date";

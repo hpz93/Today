@@ -136,14 +136,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Nv-ei-aHL">
-                                            <rect key="frame" x="20" y="20" width="414" height="176"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                                         </datePicker>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="2Nv-ei-aHL" secondAttribute="bottom" constant="20" symbolic="YES" id="4Va-Hk-PGQ"/>
-                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="leading" secondItem="upb-V4-U11" secondAttribute="leading" constant="20" symbolic="YES" id="ZQb-66-Mbv"/>
-                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="top" secondItem="upb-V4-U11" secondAttribute="top" constant="20" symbolic="YES" id="fe2-2T-S0x"/>
-                                        <constraint firstAttribute="trailing" secondItem="2Nv-ei-aHL" secondAttribute="trailing" constant="20" symbolic="YES" id="xww-xr-Pdt"/>
+                                        <constraint firstAttribute="bottom" secondItem="2Nv-ei-aHL" secondAttribute="bottom" id="4Va-Hk-PGQ"/>
+                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="leading" secondItem="upb-V4-U11" secondAttribute="leading" id="ZQb-66-Mbv"/>
+                                        <constraint firstItem="2Nv-ei-aHL" firstAttribute="top" secondItem="upb-V4-U11" secondAttribute="top" id="fe2-2T-S0x"/>
+                                        <constraint firstAttribute="trailing" secondItem="2Nv-ei-aHL" secondAttribute="trailing" id="xww-xr-Pdt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

@@ -74,7 +74,9 @@ class ReminderDetailViewController: UITableViewController {
         }
         // If editing is true, set the dataSource property to a new edit data source.
         if editing {
-            dataSource = ReminderDetailEditDataSource(reminder: reminder)
+            dataSource = ReminderDetailEditDataSource(reminder: reminder) { reminder in
+                self.editButtonItem.isEnabled = true
+            }
             // Change the navigation title to Edit Reminder if the table is in edit mode and to View Reminder if it is not.
             navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
             // Add a Cancel button to the navigation bar.
