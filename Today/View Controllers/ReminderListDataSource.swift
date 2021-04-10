@@ -12,12 +12,12 @@ class ReminderListDataSource: NSObject {
     // DateFormatter is a powerful class for creating strings from Date values in a variety of formats.
     private lazy var dateFormatter = RelativeDateTimeFormatter()
     
+    // These methods serve as a stable interface you’ll maintain later when your underlying data is no longer a simple array.
     // Update a reminder at row index.
     func update(_ reminder: Reminder, at row: Int) {
         Reminder.testData[row] = reminder
     }
     
-    // These methods serve as a stable interface you’ll maintain later when your underlying data is no longer a simple array.
     // Retrieve a reminder for row.
     func reminder(at row: Int) -> Reminder {
         return Reminder.testData[row]

@@ -51,24 +51,43 @@ class ReminderDetailViewController: UITableViewController {
     private var tempReminder: Reminder?
 //    private var detailViewDataSource: ReminderDetailViewDataSource?
     private var dataSource: UITableViewDataSource?
-    private var reminderChangeAction: ReminderChangeAction?
+    private var reminderEditAction: ReminderChangeAction?
+    private var reminderAddAction: ReminderChangeAction?
+    private var isNew = false
     
     //  When initializing a view controller from a storyboard, iOS calls the init(coder:) initializer. This configure method approach is useful for configuring after initializing, such as injecting dependencies.
-    func configure(with reminder: Reminder, changeAction: @escaping ReminderChangeAction) {
+    func configure(with reminder: Reminder, isNew: Bool = false, addAction: ReminderChangeAction? = nil, editAction: ReminderChangeAction? = nil) {
         self.reminder = reminder
-        self.reminderChangeAction = changeAction
+        self.isNew = isNew
+        self.reminderAddAction = addAction
+        self.reminderEditAction = editAction
+        
+        // If the view hasn't been loaded ever, isViewLoaded will be false.
+        // Every view is only loaded into memory one time.
+        // isViewLoaded is a property that returns true only after the view hierarchy loads.
+        if isViewLoaded {
+            setEditing(isNew, animated: false)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // If you were responding to a user action, you would animate the call to setEditing(_:animated:) by passing true. Because UIKit calls viewDidLoad() as part of the initial setup, and not in response to a user action, you turn off the animation.
-        setEditing(false, animated: false)
+        setEditing(isNew, animated: false)
         navigationItem.setRightBarButton(editButtonItem, animated: false)
         // The table view requires a reuse identifier to retrieve a cell with dequeueReusableCell(withIdentifier:for:). Passing an unregistered identifier to that method raises an exception and terminates the app.
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifier)
         
 //        detailViewDataSource = ReminderDetailViewDataSource(reminder: reminder)
 //        tableView.dataSource = detailViewDataSource
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let navigationController = navigationController, !navigationController.isToolbarHidden {
+//            navigationController.isToolbarHidden = true
+            navigationController.setToolbarHidden(true, animated: animated)
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -83,7 +102,7 @@ class ReminderDetailViewController: UITableViewController {
                 self.editButtonItem.isEnabled = true
             }
             // Change the navigation title to Edit Reminder if the table is in edit mode and to View Reminder if it is not.
-            navigationItem.title = NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
+            navigationItem.title = isNew ? NSLocalizedString("Add Reminder", comment: "add reminder nav title") : NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
             // Add a Cancel button to the navigation bar.
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
         } else {
@@ -92,7 +111,7 @@ class ReminderDetailViewController: UITableViewController {
                 self.reminder = tempReminder
                 self.tempReminder = nil
                 // Call the change action to update other views.
-                reminderChangeAction?(tempReminder)
+                reminderEditAction?(tempReminder)
                 dataSource = ReminderDetailViewDataSource(reminder: tempReminder)
             } else {
                 dataSource = ReminderDetailViewDataSource(reminder: reminder)

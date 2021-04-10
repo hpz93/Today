@@ -72,7 +72,15 @@
                             <outlet property="delegate" destination="2BV-Iz-mYV" id="IzD-uw-rtJ"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="aMM-G2-VLX">
+                            <connections>
+                                <action selector="addButtonTriggered:" destination="2BV-Iz-mYV" id="LpE-JS-By6"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="oln-lE-ti1"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6w-tt-3Eh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,7 +89,7 @@
         <!--View Reminder-->
         <scene sceneID="LN4-KB-udA">
             <objects>
-                <tableViewController id="BX0-6K-kCr" customClass="ReminderDetailViewController" customModule="Today" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReminderDetailViewController" id="BX0-6K-kCr" customClass="ReminderDetailViewController" customModule="Today" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jgg-ed-J2w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,13 +202,17 @@
         <!--Navigation Controller-->
         <scene sceneID="moA-0f-EeJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UmB-TA-Uok" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="UmB-TA-Uok" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fvK-GU-lcq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BAI-vH-ag8">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="2BV-Iz-mYV" kind="relationship" relationship="rootViewController" id="4bp-Ca-LGV"/>
                     </connections>
