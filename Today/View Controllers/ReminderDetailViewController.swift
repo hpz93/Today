@@ -45,14 +45,18 @@ class ReminderDetailViewController: UITableViewController {
 //            }
 //        }
 //    }
+    typealias ReminderChangeAction = (Reminder) -> Void
     
     private var reminder: Reminder?
+    private var tempReminder: Reminder?
 //    private var detailViewDataSource: ReminderDetailViewDataSource?
     private var dataSource: UITableViewDataSource?
+    private var reminderChangeAction: ReminderChangeAction?
     
     //  When initializing a view controller from a storyboard, iOS calls the init(coder:) initializer. This configure method approach is useful for configuring after initializing, such as injecting dependencies.
-    func configure(with reminder: Reminder) {
+    func configure(with reminder: Reminder, changeAction: @escaping ReminderChangeAction) {
         self.reminder = reminder
+        self.reminderChangeAction = changeAction
     }
     
     override func viewDidLoad() {
@@ -75,6 +79,7 @@ class ReminderDetailViewController: UITableViewController {
         // If editing is true, set the dataSource property to a new edit data source.
         if editing {
             dataSource = ReminderDetailEditDataSource(reminder: reminder) { reminder in
+                self.tempReminder = reminder
                 self.editButtonItem.isEnabled = true
             }
             // Change the navigation title to Edit Reminder if the table is in edit mode and to View Reminder if it is not.
@@ -82,7 +87,16 @@ class ReminderDetailViewController: UITableViewController {
             // Add a Cancel button to the navigation bar.
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
         } else {
-            dataSource = ReminderDetailViewDataSource(reminder: reminder)
+            // Sets the reminder data and the data source.
+            if let tempReminder = tempReminder {
+                self.reminder = tempReminder
+                self.tempReminder = nil
+                // Call the change action to update other views.
+                reminderChangeAction?(tempReminder)
+                dataSource = ReminderDetailViewDataSource(reminder: tempReminder)
+            } else {
+                dataSource = ReminderDetailViewDataSource(reminder: reminder)
+            }
             navigationItem.title = NSLocalizedString("View Reminder", comment: "view reminder nav title")
             // Remove the Cancel button from view mode.
             navigationItem.leftBarButtonItem = nil

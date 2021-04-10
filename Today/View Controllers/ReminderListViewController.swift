@@ -18,9 +18,18 @@ class ReminderListViewController: UITableViewController {
            let destination = segue.destination as? ReminderDetailViewController,
            let cell = sender as? UITableViewCell,
            let indexPath = tableView.indexPath(for: cell) {
-            let reminder = Reminder.testData[indexPath.row]
+            let rowIndex = indexPath.row
+            // Using the API from data source is better than retrieve from model directly.
+            guard let reminder = reminderListDataSource?.reminder(at: rowIndex) else {
+                fatalError("Couldn't find data source for reminder list.")
+            }
+//            let reminder = Reminder.testData[indexPath.row]
+            
             // Inject the reminder data into the incoming view controller.
-            destination.configure(with: reminder)
+            destination.configure(with: reminder) { reminder in
+                self.reminderListDataSource?.update(reminder, at: rowIndex)
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         }
     }
     
