@@ -22,6 +22,11 @@ class ReminderListDataSource: NSObject {
     func reminder(at row: Int) -> Reminder {
         return Reminder.testData[row]
     }
+    
+    // Insert a new reminder at the beginning of the testData array.
+    func add(_ reminder: Reminder) {
+        Reminder.testData.insert(reminder, at: 0)
+    }
 }
 
 // MARK: - Data Source Methods

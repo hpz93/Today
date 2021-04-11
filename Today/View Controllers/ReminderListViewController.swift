@@ -63,7 +63,10 @@ class ReminderListViewController: UITableViewController {
         
         // Because addAction is no longer the last argument in the configure method, you can’t use trailing closure syntax, and you must provide a parameter name.
         detailViewController.configure(with: reminder, isNew: true, addAction: { reminder in
-            
+            // Save the new reminder and insert it into the table view.
+            // Use the closure capturing values attribute to save data to model.
+            self.reminderListDataSource?.add(reminder)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
         
         let navigationController = UINavigationController(rootViewController: detailViewController)
