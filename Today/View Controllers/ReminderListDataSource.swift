@@ -10,7 +10,33 @@ import UIKit
 class ReminderListDataSource: NSObject {
     // Because the property is lazy, the initializer executes the first time the property is accessed.
     // DateFormatter is a powerful class for creating strings from Date values in a variety of formats.
-    private lazy var dateFormatter = RelativeDateTimeFormatter()
+//    private lazy var dateFormatter = RelativeDateTimeFormatter()
+    
+    enum Filter: Int {
+        case today
+        case future
+        case all
+        
+        // The data source should provide cells only for reminders with due dates that match the selected filter.
+        // Determine if a given date should be included in a filter.
+        func shouldInclude(date: Date) -> Bool {
+            let isInToday = Locale.current.calendar.isDateInToday(date)
+            switch self {
+            case .today:
+                return isInToday
+            case .future:
+                return (date > Date()) && !isInToday
+            case .all:
+                return true
+            }
+        }
+    }
+    
+    var filter: Filter = .today
+    
+    var filteredReminders: [Reminder] {
+        return Reminder.testData.filter { filter.shouldInclude(date: $0.dueDate) }.sorted { $0.dueDate < $1.dueDate }
+    }
     
     // These methods serve as a stable interface you’ll maintain later when your underlying data is no longer a simple array.
     // Update a reminder at row index.
@@ -20,7 +46,7 @@ class ReminderListDataSource: NSObject {
     
     // Retrieve a reminder for row.
     func reminder(at row: Int) -> Reminder {
-        return Reminder.testData[row]
+        return filteredReminders[row]
     }
     
     // Insert a new reminder at the beginning of the testData array.
@@ -38,17 +64,17 @@ extension ReminderListDataSource: UITableViewDataSource {
     static let reminderListCellIdentifier = "ReminderListCell"
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Reminder.testData.count
+        return filteredReminders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReminderListDataSource.reminderListCellIdentifier, for: indexPath) as? ReminderListCell else {
             fatalError("Unable to dequeue ReminderCell")
         }
-        let reminder = Reminder.testData[indexPath.row]
-        let dateText = dateFormatter.localizedString(for: reminder.dueDate, relativeTo: Date())
+        let currentReminder = reminder(at: indexPath.row)
+        let dateText = currentReminder.dueDateTimeText(for: filter)
 /**
-Encapsulate the imformation with access control and the configure method.
+Encapsulate the imformation with access control and the configure method with configure method.
 //         let image = reminder.isComplete ? UIImage(systemName: "circle.fill") : UIImage(systemName: "circle")
 //        cell.titleLabel.text = reminder.title
 //        cell.dateLabel.text = reminder.dueDate.description
@@ -60,10 +86,51 @@ Encapsulate the imformation with access control and the configure method.
 //            tableView.reloadRows(at: [indexPath], with: .none)
 //        }
 */
-        cell.configure(title: reminder.title, dateText: dateText, isDone: reminder.isComplete) {
-            Reminder.testData[indexPath.row].isComplete.toggle()
+        cell.configure(title: currentReminder.title, dateText: dateText, isDone: currentReminder.isComplete) {
+            var modifiedReminder = currentReminder
+            modifiedReminder.isComplete.toggle()
+            self.update(modifiedReminder, at: indexPath.row)
             tableView.reloadRows(at: [indexPath], with: .none)
         }
         return cell
+    }
+}
+
+extension Reminder {
+    static let timeFormatter: DateFormatter = {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        return timeFormatter
+    }()
+    
+    static let futureFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
+    
+    static let todayDateFormatter: DateFormatter = {
+        let format = NSLocalizedString("'Today at ' %@", comment: "format string for dates occurring today")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = String(format: format, "hh:mm a")
+        return dateFormatter
+    }()
+    
+    func dueDateTimeText(for filter: ReminderListDataSource.Filter) -> String {
+        let isInToday = Locale.current.calendar.isDateInToday(dueDate)
+        switch filter {
+        case .today:
+            return Self.timeFormatter.string(from: dueDate)
+        case .future:
+            return Self.futureFormatter.string(from: dueDate)
+        case .all:
+            if isInToday {
+                return Self.todayDateFormatter.string(from: dueDate)
+            } else {
+                return Self.futureFormatter.string(from: dueDate)
+            }
+        }
     }
 }

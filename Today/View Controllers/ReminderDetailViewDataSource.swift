@@ -41,6 +41,9 @@ class ReminderDetailViewDataSource: NSObject {
             case .date:
 //                return reminder?.dueDate.description
                 guard let date = reminder?.dueDate else { return nil }
+                if Locale.current.calendar.isDateInToday(date) {
+                    return NSLocalizedString("Today", comment: "Today for date description")
+                }
                 return Self.dateFormatter.string(from: date)
             case .time:
 //                return reminder?.dueDate.description

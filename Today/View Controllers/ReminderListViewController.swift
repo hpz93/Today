@@ -8,11 +8,16 @@
 import UIKit
 
 class ReminderListViewController: UITableViewController {
+    @IBOutlet var filterSegmentedControl: UISegmentedControl!
     static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
     static let mainStoryboardName = "Main"
     static let detailViewControllerIdentifier = "ReminderDetailViewController"
 
     private var reminderListDataSource: ReminderListDataSource?
+    private var filter: ReminderListDataSource.Filter {
+        // Enumeration initializer is failable.
+        return ReminderListDataSource.Filter(rawValue: filterSegmentedControl.selectedSegmentIndex) ?? .today
+    }
     
     // This method notifies the view controller before a segue is performed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,6 +60,12 @@ class ReminderListViewController: UITableViewController {
     @IBAction func addButtonTriggered(_ sender: UIBarButtonItem) {
         addReminder()
     }
+    
+    @IBAction func segmentControlChanged(_ sender: UISegmentedControl) {
+        reminderListDataSource?.filter = filter
+        tableView.reloadData()
+    }
+    
     
     private func addReminder() {
         let storyboard = UIStoryboard(name: Self.mainStoryboardName, bundle: nil)
