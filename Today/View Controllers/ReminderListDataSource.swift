@@ -12,6 +12,9 @@ class ReminderListDataSource: NSObject {
     // DateFormatter is a powerful class for creating strings from Date values in a variety of formats.
 //    private lazy var dateFormatter = RelativeDateTimeFormatter()
     
+    typealias ReminderCompletedAction = (Int) -> Void
+    typealias ReminderDeletedAction = () -> Void
+    
     enum Filter: Int {
         case today
         case future
@@ -38,10 +41,37 @@ class ReminderListDataSource: NSObject {
         return Reminder.testData.filter { filter.shouldInclude(date: $0.dueDate) }.sorted { $0.dueDate < $1.dueDate }
     }
     
+    // If the current filter doesn’t contain any reminders, the progress view indicates a 100-percent completion rate.
+    var percentComplete: Double {
+        guard filteredReminders.count > 0 else {
+            return 1
+        }
+        let numComplete: Double = filteredReminders.reduce(0) { (result, reminder) -> Double in
+            result + (reminder.isComplete ? 1 : 0)
+        }
+        return numComplete / Double(filteredReminders.count)
+    }
+    
+    private var reminderCompletedAction: ReminderCompletedAction?
+    private var reminderDeletedAction: ReminderDeletedAction?
+    
+    init(reminderCompletedAction: @escaping ReminderCompletedAction, reminderDeletedAction: @escaping ReminderDeletedAction) {
+        self.reminderCompletedAction = reminderCompletedAction
+        self.reminderDeletedAction = reminderDeletedAction
+        super.init()
+    }
+    
     // These methods serve as a stable interface you’ll maintain later when your underlying data is no longer a simple array.
     // Update a reminder at row index.
     func update(_ reminder: Reminder, at row: Int) {
-        Reminder.testData[row] = reminder
+        let index = self.index(for: row)
+        Reminder.testData[index] = reminder
+    }
+    
+    // Delete reminders from the backing array.
+    func delete(at row: Int) {
+        let index = self.index(for: row)
+        Reminder.testData.remove(at: index)
     }
     
     // Retrieve a reminder for row.
@@ -50,8 +80,23 @@ class ReminderListDataSource: NSObject {
     }
     
     // Insert a new reminder at the beginning of the testData array.
-    func add(_ reminder: Reminder) {
+    // And return the index of the newly inserted reminder.
+    func add(_ reminder: Reminder) -> Int? {
         Reminder.testData.insert(reminder, at: 0)
+        return filteredReminders.firstIndex {
+            $0.id == reminder.id
+        }
+    }
+    
+    // Map indices between the filtered and unfiltered arrays.
+    func index(for filteredIndex: Int) -> Int {
+        let filteredReminder = filteredReminders[filteredIndex]
+        guard let index = Reminder.testData.firstIndex(where: { (reminder: Reminder) -> Bool in
+            reminder.id == filteredReminder.id
+        }) else {
+            fatalError("Coudn't retrieve index in source array")
+        }
+        return index
     }
 }
 
@@ -90,9 +135,25 @@ Encapsulate the imformation with access control and the configure method with co
             var modifiedReminder = currentReminder
             modifiedReminder.isComplete.toggle()
             self.update(modifiedReminder, at: indexPath.row)
-            tableView.reloadRows(at: [indexPath], with: .none)
+            self.reminderCompletedAction?(indexPath.row)
         }
         return cell
+    }
+    
+    // Enable swipe-to-delete functionality for the table view.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // Verify that the user is deleting a row and call the data source’s delete method.
+        guard editingStyle == .delete else {
+            return
+        }
+        delete(at: indexPath.row)
+        // FIXME: - Why do you need performBatchUpdates here?
+        tableView.performBatchUpdates {
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } completion: { (_) in
+            tableView.reloadData()
+        }
+        reminderDeletedAction?()
     }
 }
 
