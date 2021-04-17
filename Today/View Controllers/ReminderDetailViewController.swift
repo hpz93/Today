@@ -135,8 +135,11 @@ class ReminderDetailViewController: UITableViewController {
         // If editing is true, set the dataSource property to a new edit data source.
         if editing {
             transitionToEditMode(reminder)
+            tableView.backgroundColor = UIColor(named: "EDIT_Background")
         } else {
             transitionToViewMode(reminder)
+            tableView.backgroundColor = UIColor(named: "VIEW_Background")
+
         }
         tableView.dataSource = dataSource
         tableView.reloadData()
@@ -150,6 +153,33 @@ class ReminderDetailViewController: UITableViewController {
         } else {
             tempReminder = nil
             setEditing(false, animated: true)
+        }
+    }
+}
+
+// MARK: - Delegate Methods
+
+extension ReminderDetailViewController {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if isEditing {
+            cell.backgroundColor = UIColor(named: "EDIT_TableRowBackground")
+            guard let editSection = ReminderDetailEditDataSource.ReminderSection(rawValue: indexPath.section) else {
+                return
+            }
+            if editSection == .dueDate, indexPath.row == 0 {
+                cell.textLabel?.textColor = UIColor(named: "EDIT_DateLabelText")
+                cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            }
+        } else {
+            cell.backgroundColor = .systemBackground
+            guard let viewRow = ReminderDetailViewDataSource.ReminderRow(rawValue: indexPath.row) else {
+                return
+            }
+            if viewRow == .title {
+                cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+            } else {
+                cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            }
         }
     }
 }

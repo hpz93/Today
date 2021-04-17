@@ -52,11 +52,17 @@ class ReminderListViewController: UITableViewController {
         super.viewDidLoad()
         
         // By default, the dataSource property of a UITableViewController refers to itself.
+        // Completion handler to update the user interface.
         reminderListDataSource = ReminderListDataSource(reminderCompletedAction: { reminderIndex in
             self.tableView.reloadRows(at: [IndexPath(row: reminderIndex, section: 0)], with: .automatic)
             self.refreshProgressView()
         }, reminderDeletedAction: {
             self.refreshProgressView()
+        }, remindersChangedAction: {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshProgressView()
+            }
         })
         tableView.dataSource = reminderListDataSource
     }
@@ -68,6 +74,7 @@ class ReminderListViewController: UITableViewController {
         progressContainerView.layer.cornerRadius = radius
         progressContainerView.layer.masksToBounds = true
         refreshProgressView()
+        refreshBackground()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,6 +93,7 @@ class ReminderListViewController: UITableViewController {
         reminderListDataSource?.filter = filter
         tableView.reloadData()
         refreshProgressView()
+        refreshBackground()
     }
     
     
@@ -118,6 +126,54 @@ class ReminderListViewController: UITableViewController {
         UIView.animate(withDuration: 0.2) {
             self.progressContainerView.layoutSubviews()
         }
+    }
+    
+    // Recreate the background view with a gradient based on the selected filter.
+    private func refreshBackground() {
+        tableView.backgroundView = nil
+        let backgroundView = UIView()
+        if let backgroundColors = filter.backgroundColors {
+            // Using CAGradientLayer to set the colors for the gradient with an array of CGColor instances.
+            let gradientBackgroundLayer = CAGradientLayer()
+            gradientBackgroundLayer.colors = backgroundColors
+            gradientBackgroundLayer.frame = tableView.frame
+            backgroundView.layer.addSublayer(gradientBackgroundLayer)
+        } else {
+            backgroundView.backgroundColor = filter.substituteBackgroundColor
+        }
+        tableView.backgroundView = backgroundView
+    }
+}
+
+fileprivate extension ReminderListDataSource.Filter {
+    // The beginning gradient color.
+    private var gradientBeginColor: UIColor? {
+        switch self {
+        case .today: return UIColor(named: "LIST_GradientTodayBegin")
+        case .future: return UIColor(named: "LIST_GradientFutureBegin")
+        case .all: return UIColor(named: "LIST_GradientAllBegin")
+        }
+    }
+    
+    // The ending gradient color.
+    private var gradientEndColor: UIColor? {
+        switch self {
+        case .today: return UIColor(named: "LIST_GradientTodayEnd")
+        case .future: return UIColor(named: "LIST_GradientFutureEnd")
+        case .all: return UIColor(named: "LIST_GradientAllEnd")
+        }
+    }
+    
+    var backgroundColors: [CGColor]? {
+        guard let beginColor = gradientBeginColor, let endColor = gradientEndColor else {
+            return nil
+        }
+        // The convenience property cgColor provides a CGColor representation of a UIColor instance.
+        return [beginColor.cgColor, endColor.cgColor]
+    }
+    
+    var substituteBackgroundColor: UIColor {
+        return gradientBeginColor ?? .tertiarySystemBackground
     }
 }
 

@@ -78,6 +78,8 @@ class ReminderDetailViewDataSource: NSObject {
     }
 }
 
+// MARK: - Data Source Methods
+
 extension ReminderDetailViewDataSource: UITableViewDataSource {
     static let reminderDetailCellIdentifier = "ReminderDetailCell"
     
