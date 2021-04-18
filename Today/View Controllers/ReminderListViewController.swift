@@ -39,10 +39,28 @@ class ReminderListViewController: UITableViewController {
             
             // Inject the reminder data into the incoming view controller.
             destination.configure(with: reminder, editAction: { reminder in
-                self.reminderListDataSource?.update(reminder, at: rowIndex)
-                self.tableView.reloadData()
-                // The percentage changes, your refresh method animates the change.
-                self.refreshProgressView()
+                self.reminderListDataSource?.update(reminder, at: rowIndex) { success in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            // The percentage changes, your refresh method animates the change.
+                            self.refreshProgressView()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let alertTitle = NSLocalizedString("Can't Update Reminder", comment: "error updating reminder title")
+                            let alertMessage = NSLocalizedString("An error occured while attempting to update the reminder.", comment: "error updating reminder message")
+                            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                            // Display an affirmative message on the button the user taps to dismiss the alert.
+                            let actionTitle = NSLocalizedString("OK", comment: "ok action title")
+                            // The controller executes the code in the closure when the user taps the action button.
+                            alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { _ in
+                                self.dismiss(animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
             })
         }
     }
@@ -55,9 +73,13 @@ class ReminderListViewController: UITableViewController {
         // Completion handler to update the user interface.
         reminderListDataSource = ReminderListDataSource(reminderCompletedAction: { reminderIndex in
             self.tableView.reloadRows(at: [IndexPath(row: reminderIndex, section: 0)], with: .automatic)
-            self.refreshProgressView()
+            DispatchQueue.main.async {
+                self.refreshProgressView()
+            }
         }, reminderDeletedAction: {
-            self.refreshProgressView()
+            DispatchQueue.main.async {
+                self.refreshProgressView()
+            }
         }, remindersChangedAction: {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -104,12 +126,21 @@ class ReminderListViewController: UITableViewController {
         
         // Because addAction is no longer the last argument in the configure method, you can’t use trailing closure syntax, and you must provide a parameter name.
         detailViewController.configure(with: reminder, isNew: true, addAction: { reminder in
-            // Save the new reminder and insert it into the table view.
-            // Use the closure capturing values attribute to save data to model.
-            if let index = self.reminderListDataSource?.add(reminder) {
-                self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-                self.refreshProgressView()
-            }
+//            // Save the new reminder and insert it into the table view.
+//            // Use the closure capturing values attribute to save data to model.
+//            if let index = self.reminderListDataSource?.add(reminder) {
+//                self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+//                self.refreshProgressView()
+//            }
+            
+            self.reminderListDataSource?.add(reminder, completion: { (index) in
+                if let index = index {
+                    DispatchQueue.main.async {
+                        self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                        self.refreshProgressView()
+                    }
+                }
+            })
         })
         
         let navigationController = UINavigationController(rootViewController: detailViewController)
