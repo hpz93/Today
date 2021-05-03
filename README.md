@@ -1,1 +1,3 @@
-A to-do list app
+A todo list app
+
+![](Demo.gif)
